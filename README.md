@@ -2,12 +2,12 @@
 
 ### Installation
 
-1. For the sake of completion, the ``/vendor`` directory is included in the submission as well as the git repo, but this should never be the case for a production application. If the folder does not exist or is empty, please install using the following in the root directory of the project:
+For the sake of completion, the ``/vendor`` directory is included in the submission as well as the git repo, but this should never be the case for a production application. If the folder does not exist or is empty, please install using the following in the root directory of the project:
 ``composer install``
 
 ### Note on included files
 
-Ideally you would have a ``.gitignore`` file to exclude the ``/vendor``, ``/src/templates/cache`` and so forth. For the sake of having a working project without the need of further technologies such as Composer, I have submitted everything to this repo. For production solutions a ``.gitignore`` file is absolutely mandotory.
+Ideally you would have a ``.gitignore`` file to exclude the ``/vendor``, ``/src/templates/cache`` and so forth. For the sake of having a working project without the need of further technologies such as Composer, I have submitted everything to this repo. For production solutions a ``.gitignore`` file is absolutely mandatory.
 
 ### Running the application
 
@@ -15,7 +15,7 @@ Please navigate to the ``/public`` folder and start your server from this direct
 
 ### Unit testing
 
-First please verify that PHPUnit is successfully installed via composer. Check that the /vendor/bin/phpunit symbolic link exists. If not, please re-install PHPUnit as follows:
+First please verify that PHPUnit is successfully installed via composer. Check that the ``/vendor/bin/phpunit`` symbolic link exists. If not, please re-install PHPUnit as follows:
 ``composer require phpunit/phpunit``
 
 I have added a ``phpunit.xml`` file in the root of the project that sets up the colour output and test paths. If you want to change the path to tests, you need to change this line:

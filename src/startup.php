@@ -12,6 +12,10 @@
 *   @author Albert Nel
 */
 
+/**
+*   This is to ensure that line endings work. PHP's function
+*   fgets() can sometimes not read line endings correctly.
+*/
 ini_set("auto_detect_line_endings", true);
 
 /*

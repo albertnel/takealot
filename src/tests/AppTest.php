@@ -1,6 +1,15 @@
 <?php
 
 /**
+*   AppTest class.
+*
+*   Extends the PHPUnit unit testing library.
+*   Runs tests on the validation method.
+*
+*   @author Albert Nel
+*/
+
+/**
 *   Include other application classes and files.
 */
 require_once __DIR__ . '/../utils.php';
