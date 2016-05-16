@@ -1,0 +1,10 @@
+/* Base styles */
+.container .slogan {
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+/* Page styles */
+.form-group label {
+    margin-bottom: 10px;
+}

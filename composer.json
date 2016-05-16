@@ -1,0 +1,21 @@
+{
+    "name": "Takealot Assessment",
+    "description": "Albert Nel assessment for employment at Takealot",
+    "authors": [
+        {
+            "name": "Albert Nel",
+            "email": "moovallei@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "twig/twig": "~1.0",
+        "nikic/fast-route": "^1.0",
+        "twbs/bootstrap": "^3.3"
+    },
+    "autoload" : {
+        "psr-4": {
+            "ASG\\": "src/"
+        }
+    }
+}
