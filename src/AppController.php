@@ -44,44 +44,7 @@ class AppController
                 // Configure alert
                 $parse['alert'] = $this->getAlert(ALERT_NO_FILE);
             } else {
-                // Open input file
-                $file_handle = fopen($file_array['tmp_name'], "r");
-                if ($file_handle) {
-                    while (!feof($file_handle)) {
-                        $line = trim(fgets($file_handle));
-                        if (!empty($line)) {
-                            $valid = checkIpAddress($line);
-
-                            if ($valid) {
-                                $valid_array[] = $line;
-                            } else {
-                                $invalid_array[] = $line;
-                            }
-                        }
-                    }
-                    fclose($file_handle);
-
-                    // Sort arrays in  natural order
-                    natsort($valid_array);
-                    natsort($invalid_array);
-
-                    // Open output files
-                    $output_path = __DIR__ . '/../public/output/';
-                    $file_valid = fopen($output_path . $out_file_valid, "w");
-                    $file_invalid = fopen($output_path . $out_file_invalid, "w");
-
-                    // Write to files
-                    foreach($valid_array as $valid_ip) {
-                        fwrite($file_valid, $valid_ip . "\n");
-                    }
-                    foreach($invalid_array as $valid_ip) {
-                        fwrite($file_invalid, $valid_ip . "\n");
-                    }
-
-                    // Close file handlers
-                    fclose($file_valid);
-                    fclose($file_invalid);
-
+                if ($this->processFile($file_array['tmp_name'], $out_file_valid, $out_file_invalid)) {
                     // Set output files on template for download
                     $parse['valid_file'] = $out_file_valid;
                     $parse['invalid_file'] = $out_file_invalid;
@@ -102,6 +65,55 @@ class AppController
         // Render template
         $twig = loadTwig();
         echo $twig->render('upload_file.html', $parse);
+    }
+
+    public function processFile($input_file, $out_file_valid, $out_file_invalid)
+    {
+        $valid_array = [];
+        $invalid_array = [];
+
+        // Open input file
+        $file_handle = fopen($input_file, "r");
+        if ($file_handle) {
+            while (!feof($file_handle)) {
+                $line = trim(fgets($file_handle));
+                if (!empty($line)) {
+                    $valid = checkIpAddress($line);
+
+                    if ($valid) {
+                        $valid_array[] = $line;
+                    } else {
+                        $invalid_array[] = $line;
+                    }
+                }
+            }
+            fclose($file_handle);
+
+            // Sort arrays in  natural order
+            natsort($valid_array);
+            natsort($invalid_array);
+
+            // Open output files
+            $output_path = __DIR__ . '/../public/output/';
+            $file_valid = fopen($output_path . $out_file_valid, "w");
+            $file_invalid = fopen($output_path . $out_file_invalid, "w");
+
+            // Write to files
+            foreach($valid_array as $valid_ip) {
+                fwrite($file_valid, $valid_ip . "\n");
+            }
+            foreach($invalid_array as $valid_ip) {
+                fwrite($file_invalid, $valid_ip . "\n");
+            }
+
+            // Close file handlers
+            fclose($file_valid);
+            fclose($file_invalid);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
